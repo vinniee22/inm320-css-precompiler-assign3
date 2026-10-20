@@ -1,0 +1,17 @@
+{
+  "name": "inm320-assign3-css-precompiler",
+  "version": "1.0.0",
+  "description": "INM320 Assignment 3: CSS precompiler (Sass) with lite-server",
+  "scripts": {
+    "sass": "sass --watch src/scss:public/assets/css",
+    "serve": "lite-server",
+    "build": "sass src/scss:public/assets/css",
+    "start": "concurrently \"npm:sass\" \"npm:serve\""
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "lite-server": "^2.6.1",
+    "sass": "^1.105.2"
+  }
+}

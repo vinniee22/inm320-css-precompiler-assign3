@@ -1,0 +1,278 @@
+// ---------- Variables ----------
+$font-body: Quando;
+$font-heading: 'Josefin Sans', sans-serif;
+$color-text: #787878;
+$color-dark: #111111;
+$color-light-text: #989898;
+$color-navy: #324360;
+$color-accent: #35c4ce;
+$bp-tablet: 650px;
+
+// ---------- Mixins ----------
+@mixin flex-center($justify: center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: center;
+}
+
+@mixin uppercase-link($size, $weight: 900) {
+    font-family: $font-heading;
+    text-transform: uppercase;
+    font-size: $size;
+    font-weight: $weight;
+}
+
+@mixin tablet-up {
+    @media only screen and (min-width: $bp-tablet) {
+        @content;
+    }
+}
+
+// ---------- Base ----------
+body {
+    font-family: $font-body;
+    font-size: 15px;
+    color: $color-text;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+p {
+    margin-bottom: 25px;
+    line-height: 1.6em;
+}
+a {
+    font-weight: 400;
+    text-decoration: none;
+    color: $color-dark;
+    transition: .20s;
+
+    &:hover {
+        color: #999999;
+    }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-family: $font-heading;
+    font-weight: 400;
+    line-height: 1.3em;
+    word-wrap: break-word;
+    color: $color-dark;
+}
+h1 { font-size: 37px; }
+h2 { font-size: 31px; }
+h3 { font-size: 26px; }
+h4 { font-size: 21px; }
+h5 { font-size: 18px; }
+h6 { font-size: 15px; }
+
+.container {
+    width: 94%;
+    margin: 0 auto;
+}
+
+// ---------- Header and main nav ----------
+header {
+    font-family: $font-heading;
+
+    nav ul {
+        display: none;
+    }
+}
+
+.top-logo {
+    width: 200px;
+    margin: 20px auto 40px;
+}
+
+// ---------- Posts ----------
+article {
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.image-part {
+    margin-bottom: 10px;
+}
+.post-title {
+    margin-top: 0;
+
+    a {
+        @include uppercase-link(26px);
+        color: $color-navy;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        line-height: 1.3em;
+        transition: all .3s ease;
+
+        &:hover {
+            color: $color-accent;
+        }
+    }
+}
+
+// ---------- Footer ----------
+footer {
+    padding: 30px 0;
+    text-align: center;
+    background: #eaf2ff;
+    color: $color-light-text;
+}
+#footer {
+    a {
+        color: $color-light-text;
+
+        &:hover {
+            color: $color-dark;
+        }
+    }
+}
+.footer-logo {
+    width: 200px;
+    margin: 20px auto;
+    text-align: center;
+    vertical-align: middle;
+}
+.footer-social-links {
+    padding: 20px 0;
+    line-height: 2em;
+
+    a {
+        margin: 0 10px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+
+        span {
+            display: none;
+        }
+    }
+}
+#footer-copyright {
+    padding: 20px 0;
+    font-size: 12px;
+    color: $color-light-text;
+}
+
+// ---------- Tablet and up ----------
+@include tablet-up {
+    .container {
+        width: 90%;
+    }
+
+    header nav {
+        @include flex-center;
+        max-width: 1170px;
+        margin: 0 auto;
+        height: 60px;
+
+        ul {
+            display: flex;
+        }
+        li {
+            margin: 0 15px;
+            position: relative;
+            line-height: 24px;
+
+            &.menu-item-has-children > a::after {
+                margin-left: 7px;
+                font-family: 'Font Awesome 5 Free';
+                font-size: 13px;
+                color: $color-navy;
+                content: '\f078';
+            }
+        }
+        a {
+            @include uppercase-link(12px);
+            color: $color-navy;
+            letter-spacing: 1px;
+
+            &:hover {
+                color: $color-accent;
+            }
+        }
+
+        // sub nav
+        ul ul {
+            visibility: hidden;
+            opacity: 0;
+            display: block;
+            position: absolute;
+            z-index: 9999;
+            left: 0;
+            background: #f0f0f0;
+            transition: all 0.2s ease-out;
+
+            li {
+                border-top: 1px solid #e9e9e9;
+                margin: 0;
+            }
+            a {
+                display: block;
+                color: $color-dark;
+                min-width: 175px;
+                margin: 0;
+                padding: 20px 10px;
+                line-height: 1.4em;
+                letter-spacing: 1px;
+                transition: .35s;
+
+                &:hover {
+                    background: #ffffff;
+                    color: #000;
+                }
+            }
+        }
+        ul li:hover ul {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+    .current-menu-item a {
+        border-bottom: 2px solid $color-navy;
+    }
+
+    // posts
+    article {
+        display: flex;
+    }
+    .image-part {
+        flex: 1;
+        overflow: hidden;
+        margin-bottom: 0;
+
+        img {
+            transition: transform 3.5s ease-in-out;
+
+            &:hover {
+                transform: scale(1.5, 1.5);
+            }
+        }
+    }
+    .content-part {
+        flex: 1;
+        padding-left: 50px;
+    }
+
+    // footer
+    .footer-social-links {
+        a {
+            margin: 0 28px;
+
+            span {
+                display: inline;
+                font-size: 11px;
+            }
+        }
+        i {
+            margin-right: 5px;
+        }
+    }
+}
